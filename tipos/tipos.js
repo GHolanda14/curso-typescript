@@ -17,7 +17,10 @@ var Semestre;
 const app = document.getElementById("app");
 const info = document.createElement("div");
 const p = document.createElement("p");
-p.textContent = `Meu nome é ${nome}, tenho ${idade} anos.`;
+const spanIdade = document.createElement("span");
+spanIdade.textContent = `tenho ${idade} anos.`;
+p.textContent = `Meu nome é ${nome}, `;
+p.append(spanIdade);
 const p2 = document.createElement("p");
 p2.textContent = formado ? "Sou formado em " : "Sou estudante de ";
 p2.textContent += `Sistemas de informação na UFC, ${!formado && `estou no ${Semestre.Sexto}º semestre.`}`;
@@ -40,6 +43,62 @@ let celular = ["Operadora Oi", 88, 988128765];
 const p3 = document.createElement("p");
 p3.textContent = `Telefone para contato: (${celular[1]}) ${celular[2].toString().slice(0, 5)}-${celular[2].toString().slice(5)}`;
 info === null || info === void 0 ? void 0 : info.appendChild(p3);
+//funções
+function alterarIdade(age) {
+    spanIdade.textContent = `tenho ${age} anos.`;
+    p.append(spanIdade);
+}
+let inputIdade = document.createElement("input");
+inputIdade.setAttribute("type", "number");
+app === null || app === void 0 ? void 0 : app.appendChild(inputIdade);
+let btnIdade = document.createElement("button");
+btnIdade.onclick = () => alterarIdade(inputIdade.value ? parseInt(inputIdade.value) : idade);
+btnIdade.textContent = "Alterar idade";
+app === null || app === void 0 ? void 0 : app.appendChild(btnIdade);
+//Objetos
+let usuario = {
+    nome,
+    idade
+};
+console.log(usuario);
+app === null || app === void 0 ? void 0 : app.append(document.createElement("br"));
+app === null || app === void 0 ? void 0 : app.append(document.createElement("br"));
+//Desafio Objetos
+let divFunc = document.createElement("div");
+let infoFunc = document.createElement("h2");
+infoFunc.textContent = "Supervisores: ";
+const pontoFunc = document.createElement("p");
+pontoFunc.textContent = "Status: ";
+let funcionario = {
+    supervisores: ["Ygor", "Regis"],
+    baterPonto(hora) {
+        if (hora > 8) {
+            pontoFunc.textContent = "Status: Fora do horário";
+            return "Fora do horario";
+        }
+        else {
+            pontoFunc.textContent = "Status: Ponto normal";
+            return "Ponto normal";
+        }
+    }
+};
+const listaSupervisores = document.createElement("ul");
+funcionario.supervisores.map((supervisor) => {
+    const li = document.createElement("li");
+    li.textContent = supervisor;
+    listaSupervisores.appendChild(li);
+});
+divFunc === null || divFunc === void 0 ? void 0 : divFunc.appendChild(infoFunc);
+divFunc === null || divFunc === void 0 ? void 0 : divFunc.appendChild(listaSupervisores);
+divFunc === null || divFunc === void 0 ? void 0 : divFunc.appendChild(pontoFunc);
+app === null || app === void 0 ? void 0 : app.appendChild(divFunc);
+let inputPonto = document.createElement("input");
+inputPonto.setAttribute("type", "number");
+app === null || app === void 0 ? void 0 : app.appendChild(inputPonto);
+let btnPonto = document.createElement("button");
+btnPonto.onclick = () => funcionario.baterPonto(inputPonto.value ? parseInt(inputPonto.value) : 0);
+btnPonto.textContent = "Bater ponto";
+app === null || app === void 0 ? void 0 : app.appendChild(btnPonto);
 // interface Endereco{
 //     rua: string,
 //     numero: number,
