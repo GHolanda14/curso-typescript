@@ -179,11 +179,6 @@ const contato: Contato ={
 
 console.log(contato)
 
-
-let algo = null //O tipo null é considerado como any
-algo = 12 //funciona
-algo = "haha" //também funciona
-
 // Desafio JS para TS
 type Conta = {
     saldo: number,
@@ -211,14 +206,5 @@ let correntista: Correntista = {
  
 correntista.contaBancaria.depositar(3000)
 console.log(correntista)
-
-// interface Endereco{
-//     rua: string,
-//     numero: number,
-//     complemento: string
-// }
-// let endereco: Endereco = {rua: "Rua mais bonita", numero: 3092, complemento: "Apto 204"}
-// console.log(endereco)
-
 
 
