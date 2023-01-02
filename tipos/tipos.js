@@ -99,6 +99,57 @@ let btnPonto = document.createElement("button");
 btnPonto.onclick = () => funcionario.baterPonto(inputPonto.value ? parseInt(inputPonto.value) : 0);
 btnPonto.textContent = "Bater ponto";
 app === null || app === void 0 ? void 0 : app.appendChild(btnPonto);
+//Union types
+let nota = 10; //Pode ser number ou string
+console.log(`Minha nota é ${nota}`);
+nota = '10';
+console.log(`Minha nota é ${nota}`);
+//Chegando tipos
+if (typeof nota === "number") {
+    console.log("É number");
+}
+else {
+    console.log(typeof nota);
+}
+//Tipo Never, nunca chegará ao fim corretamente
+function erro(msg) {
+    throw new Error(msg);
+}
+const produto = {
+    nome: "Detergente",
+    preco: -10,
+    validarProduto() {
+        if (!this.nome || this.nome.trim().length === 0) {
+            erro("O produto precisa de um nome");
+        }
+        if (this.preco <= 0) {
+            erro("O preço do produto é inválido");
+        }
+    }
+};
+produto.validarProduto();
+const contato = {
+    nome: "Beltrano",
+    tel1: "988127384",
+    tel2: null
+};
+console.log(contato);
+let algo = null; //O tipo null é considerado como any
+algo = 12; //funciona
+algo = "haha"; //também funciona
+let contaBancaria = {
+    saldo: 3456,
+    depositar(valor) {
+        this.saldo += valor;
+    }
+};
+let correntista = {
+    nome: 'Ana Silva',
+    contaBancaria: contaBancaria,
+    contatos: ['34567890', '98765432']
+};
+correntista.contaBancaria.depositar(3000);
+console.log(correntista);
 // interface Endereco{
 //     rua: string,
 //     numero: number,

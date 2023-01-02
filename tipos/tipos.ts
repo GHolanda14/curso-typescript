@@ -88,10 +88,13 @@ infoFunc.textContent = "Supervisores: "
 const pontoFunc = document.createElement("p")
 pontoFunc.textContent = "Status: "
 
-let funcionario: {
+//Alias
+type Funcionario = {
     supervisores: string[],
     baterPonto: (horas: number) => string
-    } = {
+    }
+
+let funcionario: Funcionario = {
     supervisores: ["Ygor","Regis"],
     baterPonto(hora){
         if(hora > 8){
@@ -127,6 +130,87 @@ let btnPonto = document.createElement("button")
 btnPonto.onclick = () => funcionario.baterPonto(inputPonto.value ? parseInt(inputPonto.value) : 0)
 btnPonto.textContent = "Bater ponto"
 app?.appendChild(btnPonto)
+
+
+//Union types
+let nota: number | string = 10 //Pode ser number ou string
+console.log(`Minha nota é ${nota}`)
+nota = '10'
+console.log(`Minha nota é ${nota}`)
+
+//Chegando tipos
+if(typeof nota === "number"){
+    console.log("É number")
+}else{
+    console.log(typeof nota)
+}
+
+//Tipo Never, nunca chegará ao fim corretamente
+function erro(msg: string): never{
+    throw new Error(msg)
+}
+
+const produto = {
+    nome: "Detergente",
+    preco: -10,
+    validarProduto(){
+        if(!this.nome || this.nome.trim().length === 0){
+            erro("O produto precisa de um nome")
+        }
+        if(this.preco <= 0){
+            erro("O preço do produto é inválido")
+        }
+    }
+}
+
+produto.validarProduto()
+
+type Contato = {
+    nome: string,
+    tel1: string,
+    tel2: string | null
+}
+
+const contato: Contato ={
+    nome: "Beltrano",
+    tel1: "988127384",
+    tel2: null    
+}
+
+console.log(contato)
+
+
+let algo = null //O tipo null é considerado como any
+algo = 12 //funciona
+algo = "haha" //também funciona
+
+// Desafio JS para TS
+type Conta = {
+    saldo: number,
+    depositar: (valor: number) => void
+}
+
+let contaBancaria: Conta = {
+    saldo: 3456,
+    depositar(valor) {
+        this.saldo += valor
+    }
+}
+
+type Correntista = {
+    nome: string,
+    contaBancaria: Conta,
+    contatos: string[]
+}
+ 
+let correntista: Correntista = {
+    nome: 'Ana Silva',
+    contaBancaria: contaBancaria,
+    contatos: ['34567890', '98765432']
+}
+ 
+correntista.contaBancaria.depositar(3000)
+console.log(correntista)
 
 // interface Endereco{
 //     rua: string,
